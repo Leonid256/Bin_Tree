@@ -10,13 +10,13 @@ digraph Tree
 	nl_0x603000001cc0 [style = invis, label = "", width = 0];
 	n_0x603000001cc0:l -> nl_0x603000001cc0 [style = invis];
 	nr_0x603000001cc0 [style = invis, label = "", width = 0];
-	n_0x603000001cc0:r -> nl_0x603000001cc0 [style = invis];
+	n_0x603000001cc0:r -> nr_0x603000001cc0 [style = invis];
 	n_0x603000001c90:r -> n_0x603000001cf0;
 	n_0x603000001cf0 [style = filled, fillcolor = lightgreen, label = "{ 0x603000001cf0 | DATA = 3 | PARENT = 0x603000001c90 | { <l> LEFT = 0x0 | <r> RIGHT = 0x0}}"];
 	nl_0x603000001cf0 [style = invis, label = "", width = 0];
 	n_0x603000001cf0:l -> nl_0x603000001cf0 [style = invis];
 	nr_0x603000001cf0 [style = invis, label = "", width = 0];
-	n_0x603000001cf0:r -> nl_0x603000001cf0 [style = invis];
+	n_0x603000001cf0:r -> nr_0x603000001cf0 [style = invis];
 	n_0x603000001c60:r -> n_0x603000001d20;
 	n_0x603000001d20 [style = filled, fillcolor = lightgrey, label = "{ 0x603000001d20 | DATA = 6 | PARENT = 0x603000001c60 | { <l> LEFT = 0x603000001d50 | <r> RIGHT = 0x603000001d80}}"];
 	n_0x603000001d20:l -> n_0x603000001d50;
@@ -24,11 +24,11 @@ digraph Tree
 	nl_0x603000001d50 [style = invis, label = "", width = 0];
 	n_0x603000001d50:l -> nl_0x603000001d50 [style = invis];
 	nr_0x603000001d50 [style = invis, label = "", width = 0];
-	n_0x603000001d50:r -> nl_0x603000001d50 [style = invis];
+	n_0x603000001d50:r -> nr_0x603000001d50 [style = invis];
 	n_0x603000001d20:r -> n_0x603000001d80;
-	n_0x603000001d80 [style = filled, fillcolor = lightgreen, label = "{ 0x603000001d80 | DATA = 7 | PARENT = 0x603000001d20 | { <l> LEFT = 0x0 | <r> RIGHT = 0x0}}"];
+	n_0x603000001d80 [style = filled, fillcolor = yellow, label = "{ 0x603000001d80 | DATA = 7 | PARENT = 0x603000001d20 | { <l> LEFT = 0x0 | <r> RIGHT = 0x0}}"];
 	nl_0x603000001d80 [style = invis, label = "", width = 0];
 	n_0x603000001d80:l -> nl_0x603000001d80 [style = invis];
 	nr_0x603000001d80 [style = invis, label = "", width = 0];
-	n_0x603000001d80:r -> nl_0x603000001d80 [style = invis];
+	n_0x603000001d80:r -> nr_0x603000001d80 [style = invis];
 }

@@ -12,6 +12,7 @@ typedef int tree_elem_t;
 
 //----------------------------------------------------------------------------
 const char* const GRAPH_FILE = "tree.dot";
+const tree_elem_t POIZON_VALUE = 676767;
 
 //----------------------------------------------------------------------------
 enum tree_status
@@ -39,12 +40,16 @@ tree_status tree_init(tree_t* tree);
 tree_node_t* new_node();
 tree_status link_left(tree_node_t* node_left, tree_node_t* node_parent);
 tree_status link_right(tree_node_t* node_right, tree_node_t* node_parent);
+tree_status delete_node(tree_node_t* node);
+tree_status dump_node(tree_node_t* node, int line);
 
 //dump
 FILE* open_graph_file(const char* const graph_file_name);
 void close_graph_file(FILE* file);
-void dump_node(FILE* file, tree_node_t* node, int depth);
-void dump_tree(FILE* file, tree_t* tree);
+void graph_dump_node(FILE* file, tree_node_t* node, int depth, tree_node_t* current);
+void dump_tree(FILE* file, tree_t* treem, tree_node_t* current);
 
+//----------------------------------------------------------------------------
+#define DUMP_NODE(node) dump_node(node, __LINE__)
 
 #endif

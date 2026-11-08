@@ -63,3 +63,35 @@ tree_status link_right(tree_node_t* node_right, tree_node_t* node_parent)
 
     return TREE_OK;
 }
+
+//----------------------------------------------------------------------------
+tree_status delete_node(tree_node_t* node)
+{
+    assert(node != NULL);
+
+    node -> data = POIZON_VALUE;
+    node -> parent = NULL;
+    node -> left = NULL;
+    node -> right = NULL;
+    free(node);
+    node = NULL;
+
+    return TREE_OK;
+}
+
+//----------------------------------------------------------------------------
+tree_status dump_node(tree_node_t* node, int line)
+{
+    assert(node != NULL);
+
+    printf("_______________________________\n");
+    printf("dump node in %d line\n", line);
+    printf("node address = <%p>\n", node);
+    printf("node value   = <%d>\n", node -> data);
+    printf("node parent  = <%p>\n", node -> parent);
+    printf("node left    = <%p>\n", node -> left);
+    printf("node right   = <%p>\n", node -> right);
+    printf("_______________________________\n");
+
+    return TREE_OK;
+}
