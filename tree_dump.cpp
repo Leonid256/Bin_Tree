@@ -20,7 +20,8 @@ void graph_dump_node(FILE* file, tree_node_t* node, int depth, tree_node_t* curr
     if (!node) return;
 
     const char* colour = "lightgrey";
-    if (node -> left == NULL || node -> right == NULL) colour = "lightgreen";
+    if (node -> left == NULL || node -> right == NULL) colour = "green";
+    if (node -> left == NULL && node -> right == NULL) colour = "lightgreen";
     if (node -> parent == NULL) colour = "lightblue";
     if ((node -> left  && node -> left -> parent  != node) || (node -> right && node -> right -> parent != node))
         colour = "red";

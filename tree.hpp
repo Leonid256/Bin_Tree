@@ -7,11 +7,13 @@ typedef int tree_elem_t;
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <sys/stat.h>
 
 #include "colours.hpp"
 
 //----------------------------------------------------------------------------
 const char* const GRAPH_FILE = "tree.dot";
+const char* const PREORDER_FILE = "preorder.txt";
 const tree_elem_t POIZON_VALUE = 676767;
 
 //----------------------------------------------------------------------------
@@ -40,8 +42,12 @@ tree_status tree_init(tree_t* tree);
 tree_node_t* new_node();
 tree_status link_left(tree_node_t* node_left, tree_node_t* node_parent);
 tree_status link_right(tree_node_t* node_right, tree_node_t* node_parent);
-tree_status delete_node(tree_node_t* node);
+void delete_node(tree_node_t* node);
+void delete_subtree(tree_node_t* node);
 tree_status dump_node(tree_node_t* node, int line);
+
+tree_node_t* pre_new_node(FILE* file, tree_node_t* parent);
+tree_status preorder_read(const char* const pre_file, tree_t* tree);
 
 //dump
 FILE* open_graph_file(const char* const graph_file_name);
