@@ -14,6 +14,7 @@ typedef int tree_elem_t;
 //----------------------------------------------------------------------------
 const char* const GRAPH_FILE = "tree.dot";
 const char* const PREORDER_FILE = "preorder.txt";
+const char* const POSTORDER_FILE = "postorder.txt";;
 const tree_elem_t POIZON_VALUE = 676767;
 
 //----------------------------------------------------------------------------
@@ -46,8 +47,11 @@ void delete_node(tree_node_t* node);
 void delete_subtree(tree_node_t* node);
 tree_status dump_node(tree_node_t* node, int line);
 
-tree_node_t* pre_new_node(FILE* file, tree_node_t* parent);
+tree_node_t* pre_new_node(FILE* file, tree_node_t* parent, size_t* size);
 tree_status preorder_read(const char* const pre_file, tree_t* tree);
+
+tree_node_t* post_new_node(FILE* file, tree_node_t* parent, size_t* size);
+tree_status postorder_read(const char* const post_file, tree_t* tree);
 
 //dump
 FILE* open_graph_file(const char* const graph_file_name);

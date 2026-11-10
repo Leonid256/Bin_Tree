@@ -114,13 +114,14 @@ tree_status dump_node(tree_node_t* node, int line)
 //     return file_info.st_size;
 // }
 
+//preorder
 //----------------------------------------------------------------------------
-tree_node_t* pre_new_node(FILE* file, tree_node_t* parent)
+tree_node_t* pre_new_node(FILE* file, tree_node_t* parent, size_t* size)
 {
     tree_node_t* node = (tree_node_t*) calloc(1, sizeof(tree_node_t));
     if (node == NULL)
     {
-        printf(RED "Error in new_node\n" CRESET);
+        printf(RED "Error in pre_new_node\n" CRESET);
         return NULL;
     }
 
@@ -129,6 +130,7 @@ tree_node_t* pre_new_node(FILE* file, tree_node_t* parent)
 
     node -> data = data;
     node -> parent = parent;
+    (*size)++;
 
     char bracket = '\0';
     fscanf(file, " %c", &bracket);
@@ -140,15 +142,15 @@ tree_node_t* pre_new_node(FILE* file, tree_node_t* parent)
     }
     else if (bracket == '(')
     {
-        node -> left = pre_new_node(file, node);
+        node -> left = pre_new_node(file, node, size);
         if (!node -> left)
         {
             delete_subtree(node);
             return NULL;
         }
     }
-    else if (bracket == '.')
-        node -> left = NULL;
+    // else if (bracket == '.')
+    //     node -> left = NULL;
     else
     {
         printf(RED "Error in new_node\n" CRESET);
@@ -163,15 +165,15 @@ tree_node_t* pre_new_node(FILE* file, tree_node_t* parent)
     }
     else if (bracket == '(')
     {
-        node -> right = pre_new_node(file, node);
+        node -> right = pre_new_node(file, node, size);
         if (!node -> right)
         {
             delete_subtree(node);
             return NULL;
         }
     }
-    else if (bracket == '.')
-        node -> right = NULL;
+    // else if (bracket == '.')
+    //     node -> right = NULL;
     else
     {
         printf(RED "Error in new_node\n" CRESET);
@@ -206,7 +208,8 @@ tree_status preorder_read(const char* const pre_file, tree_t* tree)
         printf(RED "Error in preorder_read\n" CRESET);
         return TREE_ERROR;
     }
-    tree_node_t* root = pre_new_node(file, NULL);
+    size_t size = 0;
+    tree_node_t* root = pre_new_node(file, NULL, &size);
     if (root)
         tree -> root = root;
     else
@@ -215,7 +218,102 @@ tree_status preorder_read(const char* const pre_file, tree_t* tree)
         return TREE_ERROR;
     }
     
-    tree -> size = 1;
+    tree -> size = size;
+
+    fclose(file);
+    return TREE_OK;
+}
+
+//postorder
+//----------------------------------------------------------------------------
+tree_node_t* post_new_node(FILE* file, tree_node_t* parent, size_t* size)
+{
+    tree_node_t* node = (tree_node_t*) calloc(1, sizeof(tree_node_t));
+    if (node == NULL)
+    {
+        printf(RED "Error in post_new_node\n" CRESET);
+        return NULL;
+    }
+
+    node -> parent = parent;
+
+    char bracket = '\0';
+    fscanf(file, " %c", &bracket);
+    if (bracket == '(')
+    {
+        node -> left = post_new_node(file, node, size);
+        if (!node -> left)
+        {
+            delete_subtree(node);
+            return NULL;
+        }
+    }
+    else
+    {
+        ungetc(bracket, file);
+    }
+
+    fscanf(file, " %c", &bracket);
+    if (bracket == '(')
+    {
+        node -> right = post_new_node(file, node, size);
+        if (!node -> right)
+        {
+            delete_subtree(node);
+            return NULL;
+        }
+    }
+    else
+    {
+        ungetc(bracket, file);
+    }
+
+    tree_elem_t data = 0;
+    fscanf(file, " %d", &data);
+    node -> data = data;
+    (*size)++;
+
+    fscanf(file, " %c", &bracket);
+    if (bracket != ')')
+    {
+        printf(RED "Error in post_new_node\n" CRESET);
+        return NULL;
+    }
+    
+    return node;
+}
+
+//----------------------------------------------------------------------------
+tree_status postorder_read(const char* const post_file, tree_t* tree)
+{
+    assert(post_file);
+
+    FILE* file = fopen(post_file, "r");
+    if (!file)
+    {
+        printf(RED "Error in postorder_read\n" CRESET);
+        return TREE_ERROR;
+    }
+
+    char bracket = '\0';
+    if (fscanf(file, " %c", &bracket) != 1 || bracket != '(')
+    {
+        printf(RED "Error in postorder_read\n" CRESET);
+        fclose(file);
+        return TREE_ERROR;
+    }
+    size_t size = 0;
+    tree_node_t* root = post_new_node(file, NULL, &size);
+    if (root)
+    {
+        tree -> root = root;
+        tree -> size = size;
+    }
+    else
+    {
+        printf(RED "Error in postorder_read\n" CRESET);
+        return TREE_ERROR;
+    }
 
     fclose(file);
     return TREE_OK;

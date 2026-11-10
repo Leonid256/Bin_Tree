@@ -8,8 +8,11 @@ int main()
     tree_t tree;
     tree.root = NULL;
     tree.size = 0;
-    preorder_read(PREORDER_FILE, &tree);
     // tree_init(&tree);
+
+    // preorder_read(PREORDER_FILE, &tree);
+    postorder_read(POSTORDER_FILE, &tree);
+
 
     // //left side
     // tree_node_t* left_node;
