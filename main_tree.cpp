@@ -2,9 +2,6 @@
 
 int main()
 {
-    //FILE* preorder_file = fopen(PREORDER_FILE, "r");
-    
-
     tree_t tree;
     tree.root = NULL;
     tree.size = 0;
