@@ -27,7 +27,7 @@ void graph_dump_node(FILE* file, tree_node_t* node, int depth, tree_node_t* curr
         colour = "red";
     if (node == current) colour = "yellow";
 
-    fprintf(file, "\tn_%p [style = filled, fillcolor = %s, label = \"{ %p | DATA = %d | PARENT = %p | { <l> LEFT = %p | <r> RIGHT = %p}}\"];\n",
+    fprintf(file, "\tn_%p [style = filled, fillcolor = %s, label = \"{ %p | DATA = %s | PARENT = %p | { <l> LEFT = %p | <r> RIGHT = %p}}\"];\n",
                 (void*)node, colour, (void*)node, node -> data, (void*)node -> parent, (void*)node -> left, (void*)node -> right);
 
     if (node -> left)

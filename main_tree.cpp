@@ -10,8 +10,9 @@ int main()
     tree.size = 0;
     // tree_init(&tree);
 
-    // preorder_read(PREORDER_FILE, &tree);
-    postorder_read(POSTORDER_FILE, &tree);
+    preorder_read(PREORDER_FILE, &tree);
+    //postorder_read(POSTORDER_FILE, &tree);
+    // inorder_read(INORDER_FILE, &tree);
 
 
     // //left side
@@ -37,6 +38,9 @@ int main()
     // link_right(right_right_node, right_node);
 
     // DUMP_NODE(right_right_node);
+
+    FILE* preorder_file = fopen(PREORDER_FILE, "a");
+    preorder_print(tree.root, preorder_file);
 
     tree_node_t* current = NULL;
     FILE* dump_file = open_graph_file(GRAPH_FILE);
