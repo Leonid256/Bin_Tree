@@ -52,4 +52,6 @@ int main()
     FILE* dump_file = open_graph_file(GRAPH_FILE);
     if (dump_file) dump_tree(dump_file, &tree, current);
     close_graph_file(dump_file);
+
+    delete_subtree(tree.root);
 }

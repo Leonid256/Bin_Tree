@@ -85,7 +85,7 @@ void delete_subtree(tree_node_t* node)
     delete_subtree(node -> left);
     delete_subtree(node -> right);
 
-    delete(node);
+    free(node);
 }
 
 //----------------------------------------------------------------------------
