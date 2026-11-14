@@ -2,7 +2,7 @@
 #define TREE_HPP
 
 //----------------------------------------------------------------------------
-typedef const char* tree_elem_t;
+typedef int tree_elem_t;
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -17,7 +17,7 @@ const char* const GRAPH_FILE     = "tree.dot";
 const char* const PREORDER_FILE  = "preorder.txt";
 const char* const POSTORDER_FILE = "postorder.txt";
 const char* const INORDER_FILE   = "inorder.txt";
-const tree_elem_t POIZON_VALUE = "676767";
+const tree_elem_t POIZON_VALUE = 676767;
 const size_t BUFFER_SIZE = 20;
 
 //----------------------------------------------------------------------------
@@ -50,6 +50,8 @@ void delete_node(tree_node_t* node);
 void delete_subtree(tree_node_t* node);
 tree_status dump_node(tree_node_t* node, int line);
 void preorder_print(const tree_node_t* node, FILE* file);
+void inorder_print(const tree_node_t* node, FILE* file);
+void postorder_print(const tree_node_t* node, FILE* file);
 
 tree_node_t* pre_new_node(char* buffer_file, tree_node_t* parent, size_t* size, int* i);
 tree_status preorder_read(const char* const pre_file, tree_t* tree);

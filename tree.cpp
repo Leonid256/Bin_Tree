@@ -372,7 +372,7 @@ tree_node_t* pre_new_node(char* buffer_file, tree_node_t* parent, size_t* size, 
     }
     buffer_data[buf_i] = '\0';
 
-    node -> data = buffer_data;
+    //node -> data = buffer_data;
     node -> parent = parent;
     (*size)++;
 
@@ -434,7 +434,7 @@ tree_node_t* pre_new_node(char* buffer_file, tree_node_t* parent, size_t* size, 
 }
 
 //----------------------------------------------------------------------------
-void preorder_print(const tree_node_t* node, FILE* file)
+void preorder_print(const tree_node_t* node, FILE* file)    //для строк
 {
     assert(node);
     assert(file);
@@ -444,5 +444,33 @@ void preorder_print(const tree_node_t* node, FILE* file)
     fprintf(file, "%s", node -> data);
     if (node -> left) preorder_print(node -> left, file);
     if (node -> right) preorder_print(node -> right, file);
+    fprintf(file, ")");
+}
+
+//----------------------------------------------------------------------------
+void inorder_print(const tree_node_t* node, FILE* file)     //для %d
+{
+    assert(node);
+    assert(file);
+
+
+    fprintf(file, "(");
+    if (node -> left) inorder_print(node -> left, file);
+    fprintf(file, "%d", node -> data);
+    if (node -> right) inorder_print(node -> right, file);
+    fprintf(file, ")");
+}
+
+//----------------------------------------------------------------------------
+void postorder_print(const tree_node_t* node, FILE* file)   //для %d
+{
+    assert(node);
+    assert(file);
+
+
+    fprintf(file, "(");
+    if (node -> left) postorder_print(node -> left, file);
+    if (node -> right) postorder_print(node -> right, file);
+    fprintf(file, "%d", node -> data);
     fprintf(file, ")");
 }
